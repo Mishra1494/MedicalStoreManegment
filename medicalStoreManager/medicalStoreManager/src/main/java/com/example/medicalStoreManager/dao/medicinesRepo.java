@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -25,8 +26,9 @@ public interface medicinesRepo extends CrudRepository<Medicines, Integer> {
     List<Medicines> getExpiredMeds();
 
 
-    @Query("select m from Medicines  m where m.manufacturingDate BETWEEN DATE '2020-01-01' AND DATE '2024-12-31'")
-    List<Medicines> getMedicinesBetweenMDates();
+    @Query("select m from Medicines  m where m.manufacturingDate BETWEEN  :startDate AND  :endDate")
+    List<Medicines> getMedicinesBetweenMDates(@Param("startDate") LocalDate startDate,
+                                              @Param("endDate") LocalDate endDate);
 
     @Modifying
     @Transactional

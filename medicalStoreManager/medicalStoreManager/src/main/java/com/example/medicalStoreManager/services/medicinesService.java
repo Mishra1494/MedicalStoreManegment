@@ -144,7 +144,9 @@ public class medicinesService {
     }
 
     public void getMedsBetweenYears(){
-        List<Medicines> medList = medicinerepo.getMedicinesBetweenMDates();
+        LocalDate startDate = LocalDate.parse("2020-01-01");
+        LocalDate endDate = LocalDate.parse("2024-12-12");
+        List<Medicines> medList = medicinerepo.getMedicinesBetweenMDates(startDate,endDate);
         if(!medList.isEmpty()){
             for(Medicines med : medList){
                 System.out.println(med.toString());
